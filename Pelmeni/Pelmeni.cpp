@@ -1,7 +1,12 @@
 ﻿#include <iostream>
 #include <locale.h>
 
-int main()
+#ifdef _WIN32
+#  define WIN32_LEAN_AND_MEAN
+#  include <locale.h>
+#endif
+
+int main(int argc, char **argv)
 {
     setlocale(LC_ALL, "Rus");
     Qf = af * Qp;
