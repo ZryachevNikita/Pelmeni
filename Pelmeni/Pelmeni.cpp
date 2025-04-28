@@ -13,14 +13,15 @@ int main(int argc, char **argv)
 #endif
 
     double q_pel, q_meat, q_dough; // пельмени, фарш, тесто
-    long M; // TODO rename to Q_pel
+    double Q_pel;
+    double M;
     double t;
     double af;
 
     std::cout << "Введите исходные данные.\r\n"
-        "q[п], q[ф], q[т] - мощность каждого из приборов\r\n"
+        "q[п], q[ф], q[т] - производительность каждого из приборов\r\n"
         "M - количество пельменей в день (2 смены)\r\n"
-        "t - длина одной смены в секундах\r\n"
+        "t - длина одной смены в часах\r\n"
         "af - концентрация фарша в пельмене\r\n";
 
     std::cout << "q[п] = "; std::cin >> q_pel;
@@ -35,11 +36,13 @@ int main(int argc, char **argv)
     int n_meat; // линий по фаршу
     int n_dough; // линий по тесту
 
-    double Q_meat = af * M; // мясо (общее)
+    Q_pel = M / (2 * t);
+
+    double Q_meat = af * Q_pel; // мясо (общее)
     n_meat = std::ceil(Q_meat / q_meat); // кол-во машин для фарша
-    double Q_dough = (1.0 - af) * M; // тесто (общее)
+    double Q_dough = (1.0 - af) * Q_pel; // тесто (общее)
     n_dough = std::ceil(Q_dough / q_dough); // кол-во машин для теста
-    n_pel = std::ceil(M / q_pel); // пельменные автоматы
+    n_pel = std::ceil(Q_pel / q_pel); // пельменные автоматы
 
     std::cout << "Результат: \r\n"
         "линии по тесту: " << n_dough << "\r\n"
