@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 #endif
 
     double q_pel, q_meat, q_dough; // пельмени, фарш, тесто
-    long M;
+    long M; // TODO rename to Q_pel
     double t;
     double af;
 
@@ -38,4 +38,10 @@ int main(int argc, char **argv)
     n_meat = Q_meat / q_meat; // кол-во машин для фарша (TODO: ceil to integer)
     double Q_dough = (1.0 - af) * M; // тесто (общее)
     n_dough = Q_dough / q_dough; // кол-во машин для теста
+    n_pel = M / q_pel; // пельменные автоматы
+
+    std::cout << "Результат: \r\n"
+        "линии по тесту: " << n_dough << "\r\n"
+        "линии по фаршу: " << n_meat << "\r\n"
+        "пельменные автоматы: " << n_pel << "\r\n";
 }
