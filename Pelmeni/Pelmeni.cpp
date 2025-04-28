@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <cmath>
 
 #ifdef _WIN32
 #  define WIN32_LEAN_AND_MEAN
@@ -35,10 +36,10 @@ int main(int argc, char **argv)
     int n_dough; // линий по тесту
 
     double Q_meat = af * M; // мясо (общее)
-    n_meat = Q_meat / q_meat; // кол-во машин для фарша (TODO: ceil to integer)
+    n_meat = std::ceil(Q_meat / q_meat); // кол-во машин для фарша
     double Q_dough = (1.0 - af) * M; // тесто (общее)
-    n_dough = Q_dough / q_dough; // кол-во машин для теста
-    n_pel = M / q_pel; // пельменные автоматы
+    n_dough = std::ceil(Q_dough / q_dough); // кол-во машин для теста
+    n_pel = std::ceil(M / q_pel); // пельменные автоматы
 
     std::cout << "Результат: \r\n"
         "линии по тесту: " << n_dough << "\r\n"
